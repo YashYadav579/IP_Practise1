@@ -1,1 +1,636 @@
-<h1>Hello From Github Pages</h1>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+  <title>Yash Yadav | IT Engineer</title>
+
+  <style>
+    :root {
+      --text: #17202a;
+      --muted: #5f6b76;
+      --accent: #2563eb;
+      --border: #dfe4ea;
+      --light: #f5f7fa;
+      --white: #ffffff;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: #e9edf2;
+      color: var(--text);
+      line-height: 1.5;
+    }
+
+    .resume {
+      width: 210mm;
+      min-height: 297mm;
+      margin: 30px auto;
+      padding: 18mm 17mm;
+      background: var(--white);
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
+    }
+
+    /* HEADER */
+
+    header {
+      border-bottom: 2px solid var(--text);
+      padding-bottom: 15px;
+      margin-bottom: 20px;
+    }
+
+    .name {
+      font-size: 34px;
+      font-weight: 800;
+      letter-spacing: -1px;
+      margin-bottom: 3px;
+    }
+
+    .role {
+      font-size: 16px;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+
+    .contact {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px 16px;
+      font-size: 12px;
+      color: var(--muted);
+    }
+
+    .contact a {
+      color: var(--muted);
+      text-decoration: none;
+    }
+
+    .contact a:hover {
+      color: var(--accent);
+    }
+
+    /* SECTIONS */
+
+    section {
+      margin-bottom: 18px;
+    }
+
+    .section-title {
+      font-size: 14px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.2px;
+      color: var(--text);
+      border-bottom: 1px solid var(--border);
+      padding-bottom: 5px;
+      margin-bottom: 10px;
+    }
+
+    /* SUMMARY */
+
+    .summary {
+      font-size: 12.5px;
+      color: #303b45;
+      text-align: justify;
+    }
+
+    /* EDUCATION */
+
+    .entry {
+      margin-bottom: 11px;
+    }
+
+    .entry:last-child {
+      margin-bottom: 0;
+    }
+
+    .entry-header {
+      display: flex;
+      justify-content: space-between;
+      gap: 15px;
+    }
+
+    .entry-title {
+      font-size: 13.5px;
+      font-weight: 700;
+    }
+
+    .entry-date {
+      font-size: 11.5px;
+      color: var(--muted);
+      white-space: nowrap;
+    }
+
+    .entry-subtitle {
+      font-size: 12px;
+      color: var(--muted);
+      margin-top: 2px;
+    }
+
+    /* SKILLS */
+
+    .skills-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 7px 25px;
+    }
+
+    .skill-row {
+      font-size: 12px;
+    }
+
+    .skill-label {
+      font-weight: 700;
+      display: inline;
+    }
+
+    .skill-value {
+      color: var(--muted);
+    }
+
+    /* PROJECTS */
+
+    .project {
+      margin-bottom: 13px;
+    }
+
+    .project:last-child {
+      margin-bottom: 0;
+    }
+
+    .project-title {
+      font-size: 13.5px;
+      font-weight: 700;
+      margin-bottom: 2px;
+    }
+
+    .project-tech {
+      font-size: 11px;
+      color: var(--accent);
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .project-description {
+      font-size: 12px;
+      color: #303b45;
+    }
+
+    ul {
+      padding-left: 17px;
+      margin-top: 4px;
+    }
+
+    li {
+      font-size: 12px;
+      margin-bottom: 3px;
+      color: #303b45;
+    }
+
+    /* TWO COLUMN */
+
+    .two-column {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 30px;
+    }
+
+    /* TAGS */
+
+    .tags {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+    }
+
+    .tag {
+      background: var(--light);
+      border: 1px solid var(--border);
+      padding: 4px 8px;
+      border-radius: 4px;
+      font-size: 10.5px;
+      color: #34404b;
+    }
+
+    /* FOOTER */
+
+    .footer {
+      text-align: center;
+      color: #89929b;
+      font-size: 9px;
+      margin-top: 18px;
+    }
+
+    /* PRINT */
+
+    @media print {
+      body {
+        background: white;
+      }
+
+      .resume {
+        width: 210mm;
+        min-height: 297mm;
+        margin: 0;
+        padding: 15mm 16mm;
+        box-shadow: none;
+      }
+
+      a {
+        color: inherit !important;
+      }
+
+      @page {
+        size: A4;
+        margin: 0;
+      }
+    }
+
+    /* MOBILE */
+
+    @media screen and (max-width: 800px) {
+      body {
+        background: white;
+      }
+
+      .resume {
+        width: 100%;
+        min-height: auto;
+        margin: 0;
+        padding: 25px;
+        box-shadow: none;
+      }
+
+      .entry-header {
+        flex-direction: column;
+        gap: 2px;
+      }
+
+      .skills-grid,
+      .two-column {
+        grid-template-columns: 1fr;
+        gap: 8px;
+      }
+
+      .name {
+        font-size: 29px;
+      }
+    }
+  </style>
+</head>
+
+<body>
+
+  <main class="resume">
+
+    <!-- HEADER -->
+    <header>
+      <h1 class="name">Yash Yadav</h1>
+
+      <div class="role">
+        Information Technology Engineering Student
+      </div>
+
+      <div class="contact">
+        <span>📍 Mumbai, Maharashtra, India</span>
+
+        <!-- Replace these -->
+        <a href="mailto:your.email@gmail.com">
+          ✉ your.email@gmail.com
+        </a>
+
+        <a href="tel:+91XXXXXXXXXX">
+          ☎ +91 XXXXX XXXXX
+        </a>
+
+        <a href="https://github.com/yourusername" target="_blank">
+          GitHub
+        </a>
+
+        <a href="https://www.linkedin.com/in/yourusername/" target="_blank">
+          LinkedIn
+        </a>
+
+        <a href="https://yourportfolio.com" target="_blank">
+          Portfolio
+        </a>
+      </div>
+    </header>
+
+
+    <!-- PROFILE -->
+    <section>
+      <h2 class="section-title">Profile</h2>
+
+      <p class="summary">
+        Information Technology engineering student with a Diploma in Computer
+        Engineering and hands-on experience in software development, web
+        technologies, databases, and application development. Interested in
+        building practical software solutions and learning modern development
+        technologies. Comfortable working with C++, Java, Python, SQL,
+        JavaScript, React, Tailwind CSS, and Supabase.
+      </p>
+    </section>
+
+
+    <!-- EDUCATION -->
+    <section>
+      <h2 class="section-title">Education</h2>
+
+      <div class="entry">
+        <div class="entry-header">
+          <div>
+            <div class="entry-title">
+              Bachelor of Engineering — Information Technology
+            </div>
+
+            <div class="entry-subtitle">
+              Thakur College of Engineering and Technology, Mumbai
+            </div>
+          </div>
+
+          <div class="entry-date">
+            2025 – Present
+          </div>
+        </div>
+
+        <div class="entry-subtitle">
+          Direct Second Year Entry
+        </div>
+      </div>
+
+
+      <div class="entry">
+        <div class="entry-header">
+          <div>
+            <div class="entry-title">
+              Diploma in Computer Engineering
+            </div>
+
+            <div class="entry-subtitle">
+              Vidyalankar Polytechnic, Mumbai
+            </div>
+          </div>
+
+          <div class="entry-date">
+            Completed
+          </div>
+        </div>
+
+        <div class="entry-subtitle">
+          Aggregate: 87.71%
+        </div>
+      </div>
+    </section>
+
+
+    <!-- TECHNICAL SKILLS -->
+    <section>
+      <h2 class="section-title">Technical Skills</h2>
+
+      <div class="skills-grid">
+
+        <div class="skill-row">
+          <span class="skill-label">Languages:</span>
+          <span class="skill-value">
+            C, C++, Java, Python, JavaScript, SQL, PL/SQL
+          </span>
+        </div>
+
+        <div class="skill-row">
+          <span class="skill-label">Frontend:</span>
+          <span class="skill-value">
+            HTML, CSS, JavaScript, React, Tailwind CSS
+          </span>
+        </div>
+
+        <div class="skill-row">
+          <span class="skill-label">Backend / Database:</span>
+          <span class="skill-value">
+            Supabase, MySQL, SQLite
+          </span>
+        </div>
+
+        <div class="skill-row">
+          <span class="skill-label">Development:</span>
+          <span class="skill-value">
+            REST APIs, JDBC, Authentication, CRUD Applications
+          </span>
+        </div>
+
+        <div class="skill-row">
+          <span class="skill-label">Tools:</span>
+          <span class="skill-value">
+            Git, GitHub, VS Code, PyCharm
+          </span>
+        </div>
+
+        <div class="skill-row">
+          <span class="skill-label">Python Libraries:</span>
+          <span class="skill-value">
+            Pandas, Matplotlib, Pillow, Requests, Pygame
+          </span>
+        </div>
+
+      </div>
+    </section>
+
+
+    <!-- PROJECTS -->
+    <section>
+      <h2 class="section-title">Projects</h2>
+
+
+      <div class="project">
+
+        <div class="project-title">
+          Voice-Note Ledger for Small Vendors
+        </div>
+
+        <div class="project-tech">
+          React • Tailwind CSS • Supabase • Voice / AI Processing
+        </div>
+
+        <p class="project-description">
+          A localized bookkeeping application designed to help small vendors
+          record financial transactions using voice notes in Hindi, Marathi,
+          or English.
+        </p>
+
+        <ul>
+          <li>
+            Converts voice-based entries into structured financial records.
+          </li>
+
+          <li>
+            Provides an accessible interface for tracking income and expenses.
+          </li>
+
+          <li>
+            Uses Supabase for database storage and application backend.
+          </li>
+        </ul>
+
+      </div>
+
+
+      <div class="project">
+
+        <div class="project-title">
+          Stress Compass
+        </div>
+
+        <div class="project-tech">
+          React • Tailwind CSS • Supabase
+        </div>
+
+        <p class="project-description">
+          A stress assessment and management web application designed around
+          structured daily check-ins and personalized recommendations.
+        </p>
+
+        <ul>
+          <li>
+            Implements a multi-question daily stress assessment system.
+          </li>
+
+          <li>
+            Includes mood tracking and recommendation features.
+          </li>
+
+          <li>
+            Includes chat support, music features, and emergency helpline
+            information.
+          </li>
+        </ul>
+
+      </div>
+
+
+      <div class="project">
+
+        <div class="project-title">
+          Python Utility Applications
+        </div>
+
+        <div class="project-tech">
+          Python • Tkinter • CustomTkinter • APIs • System Libraries
+        </div>
+
+        <p class="project-description">
+          Developed multiple Python-based desktop utilities involving GUI
+          development, API integration, system monitoring, networking, and
+          data visualization.
+        </p>
+
+      </div>
+
+    </section>
+
+
+    <!-- EXPERIENCE / PRACTICAL KNOWLEDGE -->
+    <section>
+      <h2 class="section-title">Technical Experience</h2>
+
+      <ul>
+        <li>
+          Developed full-stack web applications using React, Tailwind CSS,
+          and Supabase.
+        </li>
+
+        <li>
+          Worked with relational databases including MySQL, SQLite, and
+          PostgreSQL through Supabase.
+        </li>
+
+        <li>
+          Built desktop applications and utilities using Python GUI
+          frameworks.
+        </li>
+
+        <li>
+          Used Git and GitHub for source-code management and project
+          development.
+        </li>
+
+        <li>
+          Worked with Java JDBC and database-driven applications.
+        </li>
+      </ul>
+    </section>
+
+
+    <!-- TWO COLUMN INFORMATION -->
+    <div class="two-column">
+
+      <section>
+        <h2 class="section-title">Core Areas</h2>
+
+        <div class="tags">
+          <span class="tag">Software Development</span>
+          <span class="tag">Web Development</span>
+          <span class="tag">Database Management</span>
+          <span class="tag">Problem Solving</span>
+          <span class="tag">OOP</span>
+          <span class="tag">Data Structures</span>
+          <span class="tag">SQL</span>
+          <span class="tag">Git & GitHub</span>
+        </div>
+      </section>
+
+
+      <section>
+        <h2 class="section-title">Interests</h2>
+
+        <div class="tags">
+          <span class="tag">C++ Development</span>
+          <span class="tag">Full-Stack Development</span>
+          <span class="tag">Software Engineering</span>
+          <span class="tag">Problem Solving</span>
+          <span class="tag">Open Source</span>
+          <span class="tag">Technology</span>
+        </div>
+      </section>
+
+    </div>
+
+
+    <!-- ACHIEVEMENTS -->
+    <section>
+      <h2 class="section-title">Achievements & Activities</h2>
+
+      <ul>
+        <li>
+          Completed Diploma in Computer Engineering with an aggregate of
+          87.71%.
+        </li>
+
+        <li>
+          Participated in software development and hackathon-oriented
+          projects.
+        </li>
+
+        <li>
+          Built multiple academic and personal projects across Python,
+          Java, and modern web technologies.
+        </li>
+      </ul>
+    </section>
+
+
+    <div class="footer">
+      © 2026 Yash Yadav • Resume
+    </div>
+
+  </main>
+
+</body>
+</html>
