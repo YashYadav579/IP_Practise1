@@ -4,633 +4,1997 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <title>Yash Yadav | IT Engineer</title>
+  <title>Yash Yadav — Developer</title>
+
+  <meta
+    name="description"
+    content="Yash Yadav — Information Technology Engineer, developer and builder."
+  />
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <link
+    href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@300;400;500&family=Inter:wght@400;500;600;700;800&family=Space+Grotesk:wght@400;500;600;700&display=swap"
+    rel="stylesheet"
+  />
 
   <style>
-    :root {
-      --text: #17202a;
-      --muted: #5f6b76;
-      --accent: #2563eb;
-      --border: #dfe4ea;
-      --light: #f5f7fa;
-      --white: #ffffff;
-    }
+
+    /* =========================================================
+       RESET
+    ========================================================= */
 
     * {
-      box-sizing: border-box;
       margin: 0;
       padding: 0;
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
     }
 
     body {
-      font-family: Arial, Helvetica, sans-serif;
-      background: #e9edf2;
-      color: var(--text);
-      line-height: 1.5;
+      background: #050505;
+      color: #f4f4f4;
+      font-family: "Inter", sans-serif;
+      overflow-x: hidden;
     }
 
-    .resume {
-      width: 210mm;
-      min-height: 297mm;
-      margin: 30px auto;
-      padding: 18mm 17mm;
-      background: var(--white);
-      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.08);
-    }
-
-    /* HEADER */
-
-    header {
-      border-bottom: 2px solid var(--text);
-      padding-bottom: 15px;
-      margin-bottom: 20px;
-    }
-
-    .name {
-      font-size: 34px;
-      font-weight: 800;
-      letter-spacing: -1px;
-      margin-bottom: 3px;
-    }
-
-    .role {
-      font-size: 16px;
-      color: var(--accent);
-      font-weight: 600;
-      margin-bottom: 10px;
-    }
-
-    .contact {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px 16px;
-      font-size: 12px;
-      color: var(--muted);
-    }
-
-    .contact a {
-      color: var(--muted);
+    a {
+      color: inherit;
       text-decoration: none;
     }
 
-    .contact a:hover {
+    button {
+      font-family: inherit;
+    }
+
+
+    /* =========================================================
+       VARIABLES
+    ========================================================= */
+
+    :root {
+      --bg: #050505;
+      --surface: #0b0b0d;
+      --surface-2: #111114;
+
+      --text: #f5f5f5;
+      --muted: #89898f;
+
+      --line: rgba(255,255,255,0.09);
+
+      --accent: #8b5cf6;
+      --accent-2: #22d3ee;
+
+      --max: 1180px;
+    }
+
+
+    /* =========================================================
+       GLOBAL
+    ========================================================= */
+
+    .container {
+      width: min(var(--max), calc(100% - 40px));
+      margin: auto;
+    }
+
+    section {
+      padding: 120px 0;
+      position: relative;
+    }
+
+    .mono {
+      font-family: "DM Mono", monospace;
+    }
+
+
+    /* =========================================================
+       BACKGROUND
+    ========================================================= */
+
+    .background {
+      position: fixed;
+      inset: 0;
+      pointer-events: none;
+      z-index: -5;
+      overflow: hidden;
+    }
+
+    .grid {
+      position: absolute;
+      inset: 0;
+
+      background-image:
+        linear-gradient(rgba(255,255,255,0.025) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(255,255,255,0.025) 1px, transparent 1px);
+
+      background-size: 60px 60px;
+
+      mask-image: linear-gradient(
+        to bottom,
+        black 0%,
+        transparent 80%
+      );
+    }
+
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(100px);
+      opacity: .22;
+    }
+
+    .orb.one {
+      width: 500px;
+      height: 500px;
+      background: #6d28d9;
+      top: -200px;
+      left: -150px;
+      animation: float 12s ease-in-out infinite;
+    }
+
+    .orb.two {
+      width: 450px;
+      height: 450px;
+      background: #0891b2;
+      right: -200px;
+      top: 500px;
+      animation: float 15s ease-in-out infinite reverse;
+    }
+
+    @keyframes float {
+      0%,100% {
+        transform: translate(0,0);
+      }
+
+      50% {
+        transform: translate(50px,-40px);
+      }
+    }
+
+
+    /* =========================================================
+       NAVBAR
+    ========================================================= */
+
+    nav {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      z-index: 100;
+
+      backdrop-filter: blur(20px);
+      -webkit-backdrop-filter: blur(20px);
+
+      border-bottom: 1px solid transparent;
+
+      transition: .3s ease;
+    }
+
+    nav.scrolled {
+      background: rgba(5,5,5,.75);
+      border-color: var(--line);
+    }
+
+    .nav-inner {
+      height: 74px;
+
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .logo {
+      font-family: "Space Grotesk", sans-serif;
+      font-weight: 700;
+      font-size: 20px;
+      letter-spacing: -1px;
+    }
+
+    .logo span {
       color: var(--accent);
     }
 
-    /* SECTIONS */
+    .nav-links {
+      display: flex;
+      gap: 30px;
+      list-style: none;
 
-    section {
-      margin-bottom: 18px;
+      font-size: 13px;
+      color: #aaa;
     }
 
-    .section-title {
-      font-size: 14px;
-      font-weight: 800;
-      text-transform: uppercase;
-      letter-spacing: 1.2px;
-      color: var(--text);
-      border-bottom: 1px solid var(--border);
-      padding-bottom: 5px;
-      margin-bottom: 10px;
+    .nav-links a {
+      transition: .2s ease;
     }
 
-    /* SUMMARY */
-
-    .summary {
-      font-size: 12.5px;
-      color: #303b45;
-      text-align: justify;
+    .nav-links a:hover {
+      color: white;
     }
 
-    /* EDUCATION */
+    .nav-button {
+      padding: 10px 17px;
 
-    .entry {
-      margin-bottom: 11px;
+      border: 1px solid rgba(255,255,255,.15);
+      border-radius: 100px;
+
+      font-size: 12px;
+
+      background: rgba(255,255,255,.04);
+
+      transition: .25s ease;
     }
 
-    .entry:last-child {
-      margin-bottom: 0;
+    .nav-button:hover {
+      background: white;
+      color: black;
     }
 
-    .entry-header {
+
+    /* =========================================================
+       HERO
+    ========================================================= */
+
+    .hero {
+      min-height: 100vh;
+
+      display: flex;
+      align-items: center;
+
+      padding-top: 100px;
+    }
+
+    .hero-content {
+      max-width: 900px;
+    }
+
+    .availability {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+
+      padding: 7px 12px;
+
+      border: 1px solid rgba(255,255,255,.1);
+      border-radius: 100px;
+
+      background: rgba(255,255,255,.035);
+
+      font-size: 11px;
+      color: #aaa;
+
+      margin-bottom: 30px;
+    }
+
+    .availability-dot {
+      width: 7px;
+      height: 7px;
+      border-radius: 50%;
+      background: #34d399;
+
+      box-shadow: 0 0 12px #34d399;
+    }
+
+    .hero h1 {
+      font-family: "Space Grotesk", sans-serif;
+
+      font-size: clamp(55px, 9vw, 110px);
+
+      line-height: .9;
+      letter-spacing: -6px;
+
+      max-width: 1000px;
+
+      margin-bottom: 30px;
+    }
+
+    .gradient-text {
+      background: linear-gradient(
+        100deg,
+        #fff,
+        #a78bfa 45%,
+        #22d3ee
+      );
+
+      -webkit-background-clip: text;
+      background-clip: text;
+
+      color: transparent;
+    }
+
+    .hero-description {
+      max-width: 650px;
+
+      font-size: 17px;
+      line-height: 1.8;
+
+      color: #999;
+
+      margin-bottom: 35px;
+    }
+
+    .hero-description strong {
+      color: white;
+      font-weight: 500;
+    }
+
+    .hero-buttons {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+
+      gap: 9px;
+
+      padding: 13px 19px;
+
+      border-radius: 8px;
+
+      font-size: 13px;
+      font-weight: 600;
+
+      transition: .25s ease;
+    }
+
+    .btn-primary {
+      background: white;
+      color: black;
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 15px 40px rgba(255,255,255,.12);
+    }
+
+    .btn-secondary {
+      border: 1px solid var(--line);
+      background: rgba(255,255,255,.03);
+      color: white;
+    }
+
+    .btn-secondary:hover {
+      border-color: rgba(255,255,255,.3);
+      transform: translateY(-3px);
+    }
+
+    .hero-meta {
+      margin-top: 70px;
+
+      display: flex;
+      gap: 50px;
+
+      color: #777;
+
+      font-family: "DM Mono", monospace;
+      font-size: 11px;
+    }
+
+    .hero-meta strong {
+      display: block;
+
+      color: white;
+
+      font-size: 24px;
+      font-family: "Space Grotesk", sans-serif;
+
+      margin-bottom: 3px;
+    }
+
+
+    /* =========================================================
+       SECTION HEADER
+    ========================================================= */
+
+    .section-header {
       display: flex;
       justify-content: space-between;
-      gap: 15px;
+      align-items: end;
+
+      margin-bottom: 55px;
     }
 
-    .entry-title {
-      font-size: 13.5px;
-      font-weight: 700;
-    }
+    .eyebrow {
+      font-family: "DM Mono", monospace;
 
-    .entry-date {
-      font-size: 11.5px;
-      color: var(--muted);
-      white-space: nowrap;
-    }
+      font-size: 11px;
+      color: var(--accent);
 
-    .entry-subtitle {
-      font-size: 12px;
-      color: var(--muted);
-      margin-top: 2px;
-    }
+      text-transform: uppercase;
 
-    /* SKILLS */
+      letter-spacing: 2px;
 
-    .skills-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 7px 25px;
-    }
-
-    .skill-row {
-      font-size: 12px;
-    }
-
-    .skill-label {
-      font-weight: 700;
-      display: inline;
-    }
-
-    .skill-value {
-      color: var(--muted);
-    }
-
-    /* PROJECTS */
-
-    .project {
       margin-bottom: 13px;
     }
 
-    .project:last-child {
-      margin-bottom: 0;
+    .section-title {
+      font-family: "Space Grotesk", sans-serif;
+
+      font-size: clamp(35px, 5vw, 55px);
+
+      letter-spacing: -3px;
+      line-height: 1;
     }
 
-    .project-title {
-      font-size: 13.5px;
-      font-weight: 700;
-      margin-bottom: 2px;
+    .section-description {
+      max-width: 400px;
+
+      color: #777;
+
+      font-size: 13px;
+      line-height: 1.7;
     }
 
-    .project-tech {
+
+    /* =========================================================
+       ABOUT
+    ========================================================= */
+
+    .about-grid {
+      display: grid;
+
+      grid-template-columns: 1.2fr .8fr;
+
+      gap: 80px;
+    }
+
+    .about-text {
+      color: #999;
+
+      font-size: 18px;
+      line-height: 1.9;
+    }
+
+    .about-text strong {
+      color: white;
+    }
+
+    .about-list {
+      border-top: 1px solid var(--line);
+    }
+
+    .about-item {
+      display: flex;
+      justify-content: space-between;
+
+      padding: 18px 0;
+
+      border-bottom: 1px solid var(--line);
+
+      font-size: 13px;
+    }
+
+    .about-item span:first-child {
+      color: #666;
+    }
+
+    .about-item span:last-child {
+      color: white;
+    }
+
+
+    /* =========================================================
+       PROJECTS
+    ========================================================= */
+
+    .projects {
+      display: grid;
+
+      grid-template-columns: repeat(2, 1fr);
+
+      gap: 18px;
+    }
+
+    .project {
+      position: relative;
+
+      min-height: 400px;
+
+      padding: 30px;
+
+      border: 1px solid var(--line);
+
+      border-radius: 16px;
+
+      overflow: hidden;
+
+      background:
+        radial-gradient(
+          circle at 100% 0%,
+          rgba(139,92,246,.10),
+          transparent 40%
+        ),
+        #0a0a0c;
+
+      transition: .4s ease;
+    }
+
+    .project:hover {
+      transform: translateY(-7px);
+      border-color: rgba(255,255,255,.2);
+    }
+
+    .project-number {
+      font-family: "DM Mono", monospace;
+
+      color: #555;
+
       font-size: 11px;
-      color: var(--accent);
-      font-weight: 600;
+
+      margin-bottom: 70px;
+    }
+
+    .project h3 {
+      font-family: "Space Grotesk", sans-serif;
+
+      font-size: 29px;
+
+      letter-spacing: -1.5px;
+
+      margin-bottom: 12px;
+    }
+
+    .project p {
+      color: #85858b;
+
+      font-size: 13px;
+
+      line-height: 1.7;
+
+      max-width: 470px;
+    }
+
+    .project-tags {
+      display: flex;
+
+      flex-wrap: wrap;
+
+      gap: 7px;
+
+      margin-top: 25px;
+    }
+
+    .project-tag {
+      padding: 6px 9px;
+
+      border: 1px solid var(--line);
+
+      border-radius: 5px;
+
+      color: #aaa;
+
+      font-family: "DM Mono", monospace;
+
+      font-size: 9px;
+    }
+
+    .project-arrow {
+      position: absolute;
+
+      right: 30px;
+      bottom: 28px;
+
+      width: 45px;
+      height: 45px;
+
+      display: grid;
+      place-items: center;
+
+      border-radius: 50%;
+
+      border: 1px solid var(--line);
+
+      transition: .3s ease;
+    }
+
+    .project:hover .project-arrow {
+      background: white;
+      color: black;
+      transform: rotate(45deg);
+    }
+
+
+    /* =========================================================
+       TECH STACK
+    ========================================================= */
+
+    .stack {
+      display: grid;
+
+      grid-template-columns: repeat(4, 1fr);
+
+      border-top: 1px solid var(--line);
+      border-left: 1px solid var(--line);
+    }
+
+    .stack-item {
+      min-height: 150px;
+
+      padding: 25px;
+
+      border-right: 1px solid var(--line);
+      border-bottom: 1px solid var(--line);
+
+      transition: .3s ease;
+    }
+
+    .stack-item:hover {
+      background: rgba(255,255,255,.03);
+    }
+
+    .stack-icon {
+      font-size: 25px;
+
+      margin-bottom: 35px;
+    }
+
+    .stack-name {
+      font-family: "Space Grotesk", sans-serif;
+
+      font-size: 15px;
+
       margin-bottom: 4px;
     }
 
-    .project-description {
-      font-size: 12px;
-      color: #303b45;
+    .stack-type {
+      color: #666;
+
+      font-size: 10px;
+
+      font-family: "DM Mono", monospace;
     }
 
-    ul {
-      padding-left: 17px;
-      margin-top: 4px;
+
+    /* =========================================================
+       EDUCATION
+    ========================================================= */
+
+    .timeline {
+      border-top: 1px solid var(--line);
     }
 
-    li {
-      font-size: 12px;
-      margin-bottom: 3px;
-      color: #303b45;
-    }
-
-    /* TWO COLUMN */
-
-    .two-column {
+    .timeline-item {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 30px;
+
+      grid-template-columns: 180px 1fr;
+
+      padding: 30px 0;
+
+      border-bottom: 1px solid var(--line);
     }
 
-    /* TAGS */
+    .timeline-year {
+      color: #666;
 
-    .tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
+      font-family: "DM Mono", monospace;
+
+      font-size: 11px;
     }
 
-    .tag {
-      background: var(--light);
-      border: 1px solid var(--border);
-      padding: 4px 8px;
-      border-radius: 4px;
-      font-size: 10.5px;
-      color: #34404b;
+    .timeline-content h3 {
+      font-family: "Space Grotesk", sans-serif;
+
+      font-size: 21px;
+
+      margin-bottom: 6px;
     }
 
-    /* FOOTER */
+    .timeline-content p {
+      color: #777;
 
-    .footer {
+      font-size: 13px;
+    }
+
+
+    /* =========================================================
+       CURRENTLY BUILDING
+    ========================================================= */
+
+    .building {
+      position: relative;
+
+      padding: 60px;
+
+      border: 1px solid rgba(139,92,246,.25);
+
+      border-radius: 20px;
+
+      overflow: hidden;
+
+      background:
+        radial-gradient(
+          circle at 20% 20%,
+          rgba(139,92,246,.13),
+          transparent 40%
+        ),
+        radial-gradient(
+          circle at 80% 70%,
+          rgba(34,211,238,.08),
+          transparent 40%
+        ),
+        #09090b;
+    }
+
+    .building h3 {
+      font-family: "Space Grotesk", sans-serif;
+
+      font-size: clamp(30px, 4vw, 50px);
+
+      letter-spacing: -2px;
+
+      max-width: 650px;
+
+      margin-bottom: 15px;
+    }
+
+    .building p {
+      color: #888;
+
+      max-width: 620px;
+
+      line-height: 1.8;
+
+      font-size: 14px;
+    }
+
+    .building-code {
+      margin-top: 35px;
+
+      display: inline-block;
+
+      padding: 10px 14px;
+
+      background: rgba(255,255,255,.04);
+
+      border: 1px solid var(--line);
+
+      border-radius: 7px;
+
+      color: #a78bfa;
+
+      font-family: "DM Mono", monospace;
+
+      font-size: 11px;
+    }
+
+
+    /* =========================================================
+       CONTACT
+    ========================================================= */
+
+    .contact-section {
       text-align: center;
-      color: #89929b;
-      font-size: 9px;
-      margin-top: 18px;
     }
 
-    /* PRINT */
-
-    @media print {
-      body {
-        background: white;
-      }
-
-      .resume {
-        width: 210mm;
-        min-height: 297mm;
-        margin: 0;
-        padding: 15mm 16mm;
-        box-shadow: none;
-      }
-
-      a {
-        color: inherit !important;
-      }
-
-      @page {
-        size: A4;
-        margin: 0;
-      }
+    .contact-section .section-title {
+      max-width: 800px;
+      margin: auto;
     }
 
-    /* MOBILE */
+    .contact-description {
+      color: #777;
 
-    @media screen and (max-width: 800px) {
-      body {
-        background: white;
+      max-width: 500px;
+
+      margin: 25px auto 30px;
+
+      line-height: 1.8;
+
+      font-size: 14px;
+    }
+
+
+    /* =========================================================
+       FOOTER
+    ========================================================= */
+
+    footer {
+      padding: 25px 0;
+
+      border-top: 1px solid var(--line);
+
+      color: #555;
+
+      font-family: "DM Mono", monospace;
+
+      font-size: 10px;
+    }
+
+    .footer-inner {
+      display: flex;
+      justify-content: space-between;
+    }
+
+
+    /* =========================================================
+       REVEAL ANIMATION
+    ========================================================= */
+
+    .reveal {
+      opacity: 0;
+
+      transform: translateY(30px);
+
+      transition:
+        opacity .8s ease,
+        transform .8s ease;
+    }
+
+    .reveal.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+
+    /* =========================================================
+       CURSOR GLOW
+    ========================================================= */
+
+    .cursor-glow {
+      position: fixed;
+
+      width: 300px;
+      height: 300px;
+
+      border-radius: 50%;
+
+      pointer-events: none;
+
+      background: radial-gradient(
+        circle,
+        rgba(139,92,246,.08),
+        transparent 65%
+      );
+
+      transform: translate(-50%, -50%);
+
+      z-index: -1;
+    }
+
+
+    /* =========================================================
+       MOBILE
+    ========================================================= */
+
+    @media (max-width: 800px) {
+
+      section {
+        padding: 85px 0;
       }
 
-      .resume {
-        width: 100%;
-        min-height: auto;
-        margin: 0;
-        padding: 25px;
-        box-shadow: none;
+      .nav-links {
+        display: none;
       }
 
-      .entry-header {
-        flex-direction: column;
-        gap: 2px;
+      .hero h1 {
+        letter-spacing: -3px;
       }
 
-      .skills-grid,
-      .two-column {
+      .hero-description {
+        font-size: 15px;
+      }
+
+      .hero-meta {
+        gap: 25px;
+        flex-wrap: wrap;
+      }
+
+      .about-grid {
         grid-template-columns: 1fr;
-        gap: 8px;
+        gap: 45px;
       }
 
-      .name {
-        font-size: 29px;
+      .projects {
+        grid-template-columns: 1fr;
+      }
+
+      .project {
+        min-height: 370px;
+      }
+
+      .stack {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .timeline-item {
+        grid-template-columns: 1fr;
+        gap: 10px;
+      }
+
+      .building {
+        padding: 35px 25px;
+      }
+
+      .footer-inner {
+        flex-direction: column;
+        gap: 10px;
       }
     }
+
+
+    @media (max-width: 500px) {
+
+      .container {
+        width: min(100% - 28px, var(--max));
+      }
+
+      .hero h1 {
+        font-size: 55px;
+      }
+
+      .hero-meta strong {
+        font-size: 20px;
+      }
+
+      .stack {
+        grid-template-columns: 1fr 1fr;
+      }
+
+      .stack-item {
+        min-height: 130px;
+        padding: 18px;
+      }
+
+    }
+
   </style>
 </head>
 
+
 <body>
 
-  <main class="resume">
 
-    <!-- HEADER -->
-    <header>
-      <h1 class="name">Yash Yadav</h1>
+  <!-- =======================================================
+       BACKGROUND
+  ======================================================== -->
 
-      <div class="role">
-        Information Technology Engineering Student
-      </div>
+  <div class="background">
+    <div class="grid"></div>
 
-      <div class="contact">
-        <span>📍 Mumbai, Maharashtra, India</span>
+    <div class="orb one"></div>
+    <div class="orb two"></div>
+  </div>
 
-        <!-- Replace these -->
-        <a href="mailto:your.email@gmail.com">
-          ✉ yash.yadav5790@gmail.com
-        </a>
-
-        <a href="tel:+91XXXXXXXXXX">
-          ☎ +91 XXXXX XXXXX
-        </a>
-
-        <a href="https://github.com/YashYadav579" target="_blank">
-          GitHub
-        </a>
-
-        <a href="www.linkedin.com/in/yash-yadav5790" target="_blank">
-          LinkedIn
-        </a>
-
-        <a href="https://yourportfolio.com" target="_blank">
-          Portfolio
-        </a>
-      </div>
-    </header>
+  <div class="cursor-glow" id="cursorGlow"></div>
 
 
-    <!-- PROFILE -->
-    <section>
-      <h2 class="section-title">Profile</h2>
+  <!-- =======================================================
+       NAVBAR
+  ======================================================== -->
 
-      <p class="summary">
-        Information Technology engineering student with a Diploma in Computer
-        Engineering and hands-on experience in software development, web
-        technologies, databases, and application development. Interested in
-        building practical software solutions and learning modern development
-        technologies. Comfortable working with C++, Java, Python, SQL,
-        JavaScript, React, Tailwind CSS, and Supabase.
-      </p>
-    </section>
+  <nav id="navbar">
+
+    <div class="container nav-inner">
+
+      <a href="#" class="logo">
+        Y<span>.</span>
+      </a>
+
+      <ul class="nav-links">
+
+        <li>
+          <a href="#about">About</a>
+        </li>
+
+        <li>
+          <a href="#projects">Projects</a>
+        </li>
+
+        <li>
+          <a href="#stack">Stack</a>
+        </li>
+
+        <li>
+          <a href="#education">Education</a>
+        </li>
+
+      </ul>
+
+      <a
+        href="#contact"
+        class="nav-button"
+      >
+        Let's talk →
+      </a>
+
+    </div>
+
+  </nav>
 
 
-    <!-- EDUCATION -->
-    <section>
-      <h2 class="section-title">Education</h2>
+  <!-- =======================================================
+       HERO
+  ======================================================== -->
 
-      <div class="entry">
-        <div class="entry-header">
-          <div>
-            <div class="entry-title">
-              Bachelor of Engineering — Information Technology
-            </div>
+  <section class="hero">
 
-            <div class="entry-subtitle">
-              Thakur College of Engineering and Technology, Mumbai
-            </div>
-          </div>
+    <div class="container">
 
-          <div class="entry-date">
-            2025 – Present
-          </div>
+      <div class="hero-content reveal">
+
+        <div class="availability">
+
+          <span class="availability-dot"></span>
+
+          Open to opportunities & collaborations
+
         </div>
 
-        <div class="entry-subtitle">
-          Direct Second Year Entry
+
+        <h1>
+
+          Building
+          <span class="gradient-text">
+            digital experiences
+          </span>
+          that matter.
+
+        </h1>
+
+
+        <p class="hero-description">
+
+          I'm <strong>Yash Yadav</strong>, an Information Technology
+          engineering student and developer from Mumbai. I enjoy turning
+          ideas into functional, thoughtful and scalable software.
+
+        </p>
+
+
+        <div class="hero-buttons">
+
+          <a
+            href="#projects"
+            class="btn btn-primary"
+          >
+            Explore my work ↓
+          </a>
+
+
+          <!-- CHANGE THIS -->
+          <a
+            href="https://github.com/yourusername"
+            target="_blank"
+            class="btn btn-secondary"
+          >
+            GitHub ↗
+          </a>
+
         </div>
+
+
+        <div class="hero-meta">
+
+          <div>
+            <strong>87.71%</strong>
+            Diploma Aggregate
+          </div>
+
+          <div>
+            <strong>03+</strong>
+            Major Projects
+          </div>
+
+          <div>
+            <strong>∞</strong>
+            Things to build
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =======================================================
+       ABOUT
+  ======================================================== -->
+
+  <section id="about">
+
+    <div class="container">
+
+      <div class="section-header reveal">
+
+        <div>
+          <div class="eyebrow">01 / About</div>
+
+          <h2 class="section-title">
+            A developer<br>
+            who likes to build.
+          </h2>
+        </div>
+
+        <p class="section-description">
+          Not just writing code — understanding the problem,
+          designing the solution and making it actually useful.
+        </p>
+
       </div>
 
 
-      <div class="entry">
-        <div class="entry-header">
-          <div>
-            <div class="entry-title">
+      <div class="about-grid">
+
+        <div class="about-text reveal">
+
+          I am currently pursuing a
+          <strong>B.E. in Information Technology</strong>
+          at Thakur College of Engineering and Technology.
+
+          <br><br>
+
+          Before engineering, I completed my
+          <strong>Diploma in Computer Engineering</strong>
+          from Vidyalankar Polytechnic with an
+          aggregate of <strong>87.71%</strong>.
+
+          <br><br>
+
+          My interests sit at the intersection of
+          <strong>software development, web technologies,
+          databases and problem solving.</strong>
+
+          <br><br>
+
+          I like projects where I can go from
+          <strong>idea → architecture → code → working product.</strong>
+
+        </div>
+
+
+        <div class="about-list reveal">
+
+          <div class="about-item">
+            <span>Location</span>
+            <span>Mumbai, India</span>
+          </div>
+
+          <div class="about-item">
+            <span>Education</span>
+            <span>B.E. Information Technology</span>
+          </div>
+
+          <div class="about-item">
+            <span>Focus</span>
+            <span>Software Development</span>
+          </div>
+
+          <div class="about-item">
+            <span>Currently learning</span>
+            <span>Full-Stack Development</span>
+          </div>
+
+          <div class="about-item">
+            <span>Favorite language</span>
+            <span>C++</span>
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =======================================================
+       PROJECTS
+  ======================================================== -->
+
+  <section id="projects">
+
+    <div class="container">
+
+      <div class="section-header reveal">
+
+        <div>
+
+          <div class="eyebrow">
+            02 / Selected Work
+          </div>
+
+          <h2 class="section-title">
+            Things I've<br>
+            built.
+          </h2>
+
+        </div>
+
+        <p class="section-description">
+          A selection of projects where technology meets
+          real-world problems.
+        </p>
+
+      </div>
+
+
+      <div class="projects">
+
+
+        <!-- PROJECT 01 -->
+
+        <article class="project reveal">
+
+          <div class="project-number">
+            PROJECT / 01
+          </div>
+
+          <h3>
+            Voice-Note Ledger
+          </h3>
+
+          <p>
+            A localized bookkeeping platform designed for
+            small vendors. Users can record financial
+            transactions naturally through voice in
+            Hindi, Marathi or English.
+          </p>
+
+          <div class="project-tags">
+
+            <span class="project-tag">
+              React
+            </span>
+
+            <span class="project-tag">
+              Tailwind
+            </span>
+
+            <span class="project-tag">
+              Supabase
+            </span>
+
+            <span class="project-tag">
+              AI
+            </span>
+
+          </div>
+
+          <div class="project-arrow">
+            ↗
+          </div>
+
+        </article>
+
+
+        <!-- PROJECT 02 -->
+
+        <article class="project reveal">
+
+          <div class="project-number">
+            PROJECT / 02
+          </div>
+
+          <h3>
+            Stress Compass
+          </h3>
+
+          <p>
+            A web application focused on structured daily
+            check-ins, mood tracking, personalized
+            recommendations and supportive resources.
+          </p>
+
+          <div class="project-tags">
+
+            <span class="project-tag">
+              React
+            </span>
+
+            <span class="project-tag">
+              Tailwind
+            </span>
+
+            <span class="project-tag">
+              Supabase
+            </span>
+
+            <span class="project-tag">
+              UX
+            </span>
+
+          </div>
+
+          <div class="project-arrow">
+            ↗
+          </div>
+
+        </article>
+
+
+        <!-- PROJECT 03 -->
+
+        <article class="project reveal">
+
+          <div class="project-number">
+            PROJECT / 03
+          </div>
+
+          <h3>
+            Python Utilities
+          </h3>
+
+          <p>
+            A collection of Python utilities and desktop
+            applications exploring GUI development, APIs,
+            networking, system monitoring and data
+            visualization.
+          </p>
+
+          <div class="project-tags">
+
+            <span class="project-tag">
+              Python
+            </span>
+
+            <span class="project-tag">
+              Tkinter
+            </span>
+
+            <span class="project-tag">
+              APIs
+            </span>
+
+            <span class="project-tag">
+              Pandas
+            </span>
+
+          </div>
+
+          <div class="project-arrow">
+            ↗
+          </div>
+
+        </article>
+
+
+        <!-- PROJECT 04 -->
+
+        <article class="project reveal">
+
+          <div class="project-number">
+            PROJECT / 04
+          </div>
+
+          <h3>
+            More coming soon.
+          </h3>
+
+          <p>
+            Currently exploring new ideas and building
+            projects that push my understanding of
+            software engineering and modern web
+            technologies.
+          </p>
+
+          <div class="project-tags">
+
+            <span class="project-tag">
+              BUILD
+            </span>
+
+            <span class="project-tag">
+              LEARN
+            </span>
+
+            <span class="project-tag">
+              SHIP
+            </span>
+
+          </div>
+
+          <div class="project-arrow">
+            +
+          </div>
+
+        </article>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =======================================================
+       TECH STACK
+  ======================================================== -->
+
+  <section id="stack">
+
+    <div class="container">
+
+      <div class="section-header reveal">
+
+        <div>
+
+          <div class="eyebrow">
+            03 / Toolkit
+          </div>
+
+          <h2 class="section-title">
+            My stack.
+          </h2>
+
+        </div>
+
+        <p class="section-description">
+          Technologies I use to turn ideas into working
+          software.
+        </p>
+
+      </div>
+
+
+      <div class="stack">
+
+
+        <div class="stack-item reveal">
+
+          <div class="stack-icon">
+            ◈
+          </div>
+
+          <div class="stack-name">
+            C / C++
+          </div>
+
+          <div class="stack-type">
+            LANGUAGES
+          </div>
+
+        </div>
+
+
+        <div class="stack-item reveal">
+
+          <div class="stack-icon">
+            ◇
+          </div>
+
+          <div class="stack-name">
+            Java
+          </div>
+
+          <div class="stack-type">
+            LANGUAGE
+          </div>
+
+        </div>
+
+
+        <div class="stack-item reveal">
+
+          <div class="stack-icon">
+            λ
+          </div>
+
+          <div class="stack-name">
+            Python
+          </div>
+
+          <div class="stack-type">
+            LANGUAGE
+          </div>
+
+        </div>
+
+
+        <div class="stack-item reveal">
+
+          <div class="stack-icon">
+            &lt;/&gt;
+          </div>
+
+          <div class="stack-name">
+            JavaScript
+          </div>
+
+          <div class="stack-type">
+            LANGUAGE
+          </div>
+
+        </div>
+
+
+        <div class="stack-item reveal">
+
+          <div class="stack-icon">
+            ◎
+          </div>
+
+          <div class="stack-name">
+            React
+          </div>
+
+          <div class="stack-type">
+            FRONTEND
+          </div>
+
+        </div>
+
+
+        <div class="stack-item reveal">
+
+          <div class="stack-icon">
+            ✦
+          </div>
+
+          <div class="stack-name">
+            Tailwind CSS
+          </div>
+
+          <div class="stack-type">
+            UI
+          </div>
+
+        </div>
+
+
+        <div class="stack-item reveal">
+
+          <div class="stack-icon">
+            ◉
+          </div>
+
+          <div class="stack-name">
+            Supabase
+          </div>
+
+          <div class="stack-type">
+            BACKEND
+          </div>
+
+        </div>
+
+
+        <div class="stack-item reveal">
+
+          <div class="stack-icon">
+            ▣
+          </div>
+
+          <div class="stack-name">
+            SQL
+          </div>
+
+          <div class="stack-type">
+            DATABASE
+          </div>
+
+        </div>
+
+
+        <div class="stack-item reveal">
+
+          <div class="stack-icon">
+            ◆
+          </div>
+
+          <div class="stack-name">
+            Git
+          </div>
+
+          <div class="stack-type">
+            VERSION CONTROL
+          </div>
+
+        </div>
+
+
+        <div class="stack-item reveal">
+
+          <div class="stack-icon">
+            ◫
+          </div>
+
+          <div class="stack-name">
+            GitHub
+          </div>
+
+          <div class="stack-type">
+            DEVELOPMENT
+          </div>
+
+        </div>
+
+
+        <div class="stack-item reveal">
+
+          <div class="stack-icon">
+            ⌘
+          </div>
+
+          <div class="stack-name">
+            MySQL
+          </div>
+
+          <div class="stack-type">
+            DATABASE
+          </div>
+
+        </div>
+
+
+        <div class="stack-item reveal">
+
+          <div class="stack-icon">
+            ✺
+          </div>
+
+          <div class="stack-name">
+            REST APIs
+          </div>
+
+          <div class="stack-type">
+            DEVELOPMENT
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =======================================================
+       EDUCATION
+  ======================================================== -->
+
+  <section id="education">
+
+    <div class="container">
+
+      <div class="section-header reveal">
+
+        <div>
+
+          <div class="eyebrow">
+            04 / Journey
+          </div>
+
+          <h2 class="section-title">
+            The journey.
+          </h2>
+
+        </div>
+
+      </div>
+
+
+      <div class="timeline">
+
+
+        <div class="timeline-item reveal">
+
+          <div class="timeline-year">
+            2025 — PRESENT
+          </div>
+
+          <div class="timeline-content">
+
+            <h3>
+              B.E. Information Technology
+            </h3>
+
+            <p>
+              Thakur College of Engineering and Technology
+              · Mumbai
+            </p>
+
+            <p style="margin-top:8px;">
+              Direct Second Year Entry
+            </p>
+
+          </div>
+
+        </div>
+
+
+        <div class="timeline-item reveal">
+
+          <div class="timeline-year">
+            COMPLETED
+          </div>
+
+          <div class="timeline-content">
+
+            <h3>
               Diploma in Computer Engineering
-            </div>
+            </h3>
 
-            <div class="entry-subtitle">
-              Vidyalankar Polytechnic, Mumbai
-            </div>
+            <p>
+              Vidyalankar Polytechnic · Mumbai
+            </p>
+
+            <p style="margin-top:8px;">
+              Aggregate: <strong style="color:white;">
+                87.71%
+              </strong>
+            </p>
+
           </div>
 
-          <div class="entry-date">
-            Completed
-          </div>
         </div>
 
-        <div class="entry-subtitle">
-          Aggregate: 87.71%
-        </div>
-      </div>
-    </section>
-
-
-    <!-- TECHNICAL SKILLS -->
-    <section>
-      <h2 class="section-title">Technical Skills</h2>
-
-      <div class="skills-grid">
-
-        <div class="skill-row">
-          <span class="skill-label">Languages:</span>
-          <span class="skill-value">
-            C, C++, Java, Python, JavaScript, SQL, PL/SQL
-          </span>
-        </div>
-
-        <div class="skill-row">
-          <span class="skill-label">Frontend:</span>
-          <span class="skill-value">
-            HTML, CSS, JavaScript, React, Tailwind CSS
-          </span>
-        </div>
-
-        <div class="skill-row">
-          <span class="skill-label">Backend / Database:</span>
-          <span class="skill-value">
-            Supabase, MySQL, SQLite
-          </span>
-        </div>
-
-        <div class="skill-row">
-          <span class="skill-label">Development:</span>
-          <span class="skill-value">
-            REST APIs, JDBC, Authentication, CRUD Applications
-          </span>
-        </div>
-
-        <div class="skill-row">
-          <span class="skill-label">Tools:</span>
-          <span class="skill-value">
-            Git, GitHub, VS Code, PyCharm
-          </span>
-        </div>
-
-        <div class="skill-row">
-          <span class="skill-label">Python Libraries:</span>
-          <span class="skill-value">
-            Pandas, Matplotlib, Pillow, Requests, Pygame
-          </span>
-        </div>
 
       </div>
-    </section>
-
-
-    <!-- PROJECTS -->
-    <section>
-      <h2 class="section-title">Projects</h2>
-
-
-      <div class="project">
-
-        <div class="project-title">
-          Voice-Note Ledger for Small Vendors
-        </div>
-
-        <div class="project-tech">
-          React • Tailwind CSS • Supabase • Voice / AI Processing
-        </div>
-
-        <p class="project-description">
-          A localized bookkeeping application designed to help small vendors
-          record financial transactions using voice notes in Hindi, Marathi,
-          or English.
-        </p>
-
-        <ul>
-          <li>
-            Converts voice-based entries into structured financial records.
-          </li>
-
-          <li>
-            Provides an accessible interface for tracking income and expenses.
-          </li>
-
-          <li>
-            Uses Supabase for database storage and application backend.
-          </li>
-        </ul>
-
-      </div>
-
-
-      <div class="project">
-
-        <div class="project-title">
-          Stress Compass
-        </div>
-
-        <div class="project-tech">
-          React • Tailwind CSS • Supabase
-        </div>
-
-        <p class="project-description">
-          A stress assessment and management web application designed around
-          structured daily check-ins and personalized recommendations.
-        </p>
-
-        <ul>
-          <li>
-            Implements a multi-question daily stress assessment system.
-          </li>
-
-          <li>
-            Includes mood tracking and recommendation features.
-          </li>
-
-          <li>
-            Includes chat support, music features, and emergency helpline
-            information.
-          </li>
-        </ul>
-
-      </div>
-
-
-      <div class="project">
-
-        <div class="project-title">
-          Python Utility Applications
-        </div>
-
-        <div class="project-tech">
-          Python • Tkinter • CustomTkinter • APIs • System Libraries
-        </div>
-
-        <p class="project-description">
-          Developed multiple Python-based desktop utilities involving GUI
-          development, API integration, system monitoring, networking, and
-          data visualization.
-        </p>
-
-      </div>
-
-    </section>
-
-
-    <!-- EXPERIENCE / PRACTICAL KNOWLEDGE -->
-    <section>
-      <h2 class="section-title">Technical Experience</h2>
-
-      <ul>
-        <li>
-          Developed full-stack web applications using React, Tailwind CSS,
-          and Supabase.
-        </li>
-
-        <li>
-          Worked with relational databases including MySQL, SQLite, and
-          PostgreSQL through Supabase.
-        </li>
-
-        <li>
-          Built desktop applications and utilities using Python GUI
-          frameworks.
-        </li>
-
-        <li>
-          Used Git and GitHub for source-code management and project
-          development.
-        </li>
-
-        <li>
-          Worked with Java JDBC and database-driven applications.
-        </li>
-      </ul>
-    </section>
-
-
-    <!-- TWO COLUMN INFORMATION -->
-    <div class="two-column">
-
-      <section>
-        <h2 class="section-title">Core Areas</h2>
-
-        <div class="tags">
-          <span class="tag">Software Development</span>
-          <span class="tag">Web Development</span>
-          <span class="tag">Database Management</span>
-          <span class="tag">Problem Solving</span>
-          <span class="tag">OOP</span>
-          <span class="tag">Data Structures</span>
-          <span class="tag">SQL</span>
-          <span class="tag">Git & GitHub</span>
-        </div>
-      </section>
-
-
-      <section>
-        <h2 class="section-title">Interests</h2>
-
-        <div class="tags">
-          <span class="tag">C++ Development</span>
-          <span class="tag">Full-Stack Development</span>
-          <span class="tag">Software Engineering</span>
-          <span class="tag">Problem Solving</span>
-          <span class="tag">Open Source</span>
-          <span class="tag">Technology</span>
-        </div>
-      </section>
 
     </div>
 
-
-    <!-- ACHIEVEMENTS -->
-    <section>
-      <h2 class="section-title">Achievements & Activities</h2>
-
-      <ul>
-        <li>
-          Completed Diploma in Computer Engineering with an aggregate of
-          87.71%.
-        </li>
-
-        <li>
-          Participated in software development and hackathon-oriented
-          projects.
-        </li>
-
-        <li>
-          Built multiple academic and personal projects across Python,
-          Java, and modern web technologies.
-        </li>
-      </ul>
-    </section>
+  </section>
 
 
-    <div class="footer">
-      © 2026 Yash Yadav • Resume
+  <!-- =======================================================
+       CURRENTLY BUILDING
+  ======================================================== -->
+
+  <section>
+
+    <div class="container">
+
+      <div class="building reveal">
+
+        <div class="eyebrow">
+          Currently building
+        </div>
+
+        <h3>
+          Learning. Experimenting.
+          Turning ideas into products.
+        </h3>
+
+        <p>
+          I'm continuously experimenting with modern
+          development tools, AI-powered applications,
+          full-stack development and better ways to solve
+          real-world problems with software.
+        </p>
+
+        <div class="building-code">
+          const nextProject = "something worth building";
+        </div>
+
+      </div>
+
     </div>
 
-  </main>
+  </section>
+
+
+  <!-- =======================================================
+       CONTACT
+  ======================================================== -->
+
+  <section
+    id="contact"
+    class="contact-section"
+  >
+
+    <div class="container reveal">
+
+      <div class="eyebrow">
+        05 / Contact
+      </div>
+
+      <h2 class="section-title">
+        Have an idea?
+        <br>
+        Let's build it.
+      </h2>
+
+      <p class="contact-description">
+        Whether it's a project, collaboration, internship
+        opportunity or simply a conversation about
+        technology — feel free to reach out.
+      </p>
+
+      <div class="hero-buttons" style="justify-content:center;">
+
+        <!-- CHANGE EMAIL -->
+
+        <a
+          href="mailto:your.email@gmail.com"
+          class="btn btn-primary"
+        >
+          Send me an email ↗
+        </a>
+
+
+        <!-- CHANGE LINKEDIN -->
+
+        <a
+          href="https://www.linkedin.com/in/yourusername/"
+          target="_blank"
+          class="btn btn-secondary"
+        >
+          LinkedIn ↗
+        </a>
+
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- =======================================================
+       FOOTER
+  ======================================================== -->
+
+  <footer>
+
+    <div class="container footer-inner">
+
+      <span>
+        © 2026 YASH YADAV
+      </span>
+
+      <span>
+        DESIGNED & BUILT WITH CODE
+      </span>
+
+    </div>
+
+  </footer>
+
+
+  <!-- =======================================================
+       JAVASCRIPT
+  ======================================================== -->
+
+  <script>
+
+    /* =====================================================
+       NAVBAR SCROLL
+    ===================================================== */
+
+    const navbar = document.getElementById("navbar");
+
+    window.addEventListener("scroll", () => {
+
+      if (window.scrollY > 30) {
+        navbar.classList.add("scrolled");
+      } else {
+        navbar.classList.remove("scrolled");
+      }
+
+    });
+
+
+    /* =====================================================
+       SCROLL REVEAL
+    ===================================================== */
+
+    const observer = new IntersectionObserver(
+      (entries) => {
+
+        entries.forEach((entry) => {
+
+          if (entry.isIntersecting) {
+
+            entry.target.classList.add("active");
+
+            observer.unobserve(entry.target);
+
+          }
+
+        });
+
+      },
+      {
+        threshold: 0.12
+      }
+    );
+
+
+    document
+      .querySelectorAll(".reveal")
+      .forEach((element) => {
+
+        observer.observe(element);
+
+      });
+
+
+    /* =====================================================
+       CURSOR GLOW
+    ===================================================== */
+
+    const glow = document.getElementById("cursorGlow");
+
+    document.addEventListener("mousemove", (event) => {
+
+      glow.style.left = event.clientX + "px";
+      glow.style.top = event.clientY + "px";
+
+    });
+
+
+    /* =====================================================
+       PROJECT CARD TILT
+    ===================================================== */
+
+    document
+      .querySelectorAll(".project")
+      .forEach((card) => {
+
+        card.addEventListener("mousemove", (event) => {
+
+          const rect = card.getBoundingClientRect();
+
+          const x =
+            (event.clientX - rect.left) /
+            rect.width;
+
+          const y =
+            (event.clientY - rect.top) /
+            rect.height;
+
+          const rotateX = (0.5 - y) * 4;
+          const rotateY = (x - 0.5) * 4;
+
+          card.style.transform =
+            `perspective(900px)
+             rotateX(${rotateX}deg)
+             rotateY(${rotateY}deg)
+             translateY(-7px)`;
+
+        });
+
+
+        card.addEventListener("mouseleave", () => {
+
+          card.style.transform = "";
+
+        });
+
+      });
+
+
+    /* =====================================================
+       SMOOTH ANCHOR OFFSET
+    ===================================================== */
+
+    document
+      .querySelectorAll('a[href^="#"]')
+      .forEach((link) => {
+
+        link.addEventListener("click", function(event) {
+
+          const target =
+            document.querySelector(
+              this.getAttribute("href")
+            );
+
+          if (!target) return;
+
+          event.preventDefault();
+
+          target.scrollIntoView({
+            behavior: "smooth"
+          });
+
+        });
+
+      });
+
+  </script>
 
 </body>
 </html>
